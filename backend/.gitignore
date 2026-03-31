@@ -1,0 +1,50 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.Python
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.env/
+
+# ── Flask instance folder (DATABASE LIVES HERE — NEVER COMMIT) ───────────────
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Flask / Werkzeug ──────────────────────────────────────────────────────────
+flask_session/
+
+# ── Migrations (optional — keep if you want migration history in git) ─────────
+# migrations/versions/*.py  ← uncomment to ignore migration files
+
+# ── Environment & secrets ─────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Distribution / packaging ──────────────────────────────────────────────────
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# ── Testing & coverage ────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ── PyCharm ───────────────────────────────────────────────────────────────────
+.idea/
+*.iml
