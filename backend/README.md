@@ -1,5 +1,4 @@
 === Login Credentials ===
-Admin: admin@glttravel.com / admin123
 User:  john@example.com / password123
 
 === API Endpoints ===
@@ -9,7 +8,6 @@ Destinations: http://localhost:5000/api/destinations
 Start server with: python run.py
 
 SAMPLE LOGIN CREDENTIALS:
-   Admin: admin@glttravel.com / admin123
    User: john@example.com / password123
    User: emma.rodriguez@example.com / emma123!
 
