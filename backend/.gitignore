@@ -50,3 +50,7 @@ htmlcov/
 *.iml
 
 postgres.txt
+credentials.txt
+add_seed_data.py
+seed_data.py
+setup.py
