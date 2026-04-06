@@ -8,14 +8,31 @@ echo "==> Installing dependencies..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
-echo "==> Running database migrations..."
-# If migrations folder doesn't exist, initialise it first
-if [ ! -d "migrations" ]; then
-    echo "  --> No migrations folder found, running flask db init..."
-    python -m flask db init
-    python -m flask db migrate -m "Initial migration"
-fi
+echo "==> Setting up database..."
 
-python -m flask db upgrade
+# Since this is a fresh PostgreSQL database on Render,
+# drop any partial migration state and recreate cleanly
+python << 'PYEOF'
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from dotenv import load_dotenv
+load_dotenv()
+
+from app import create_app, db
+
+app = create_app()
+with app.app_context():
+    print("  --> Dropping all existing tables (fresh deploy)...")
+    db.drop_all()
+    print("  --> Creating all tables from models...")
+    db.create_all()
+    print("  --> Tables created successfully!")
+
+    # Stamp alembic so it knows migrations are up to date
+    from flask_migrate import stamp
+    stamp()
+    print("  --> Migration state stamped as current.")
+PYEOF
 
 echo "==> Build complete!"
