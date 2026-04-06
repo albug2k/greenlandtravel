@@ -17,7 +17,9 @@ load_dotenv(os.path.join(project_home, '.env'))
 # Import and create the Flask app
 from app import create_app
 
-application = create_app()   # PythonAnywhere looks for "application"
+# Both gunicorn and PythonAnywhere look for 'application'
+application = create_app()
+app = application          # flask CLI looks for 'app'
 
 if __name__ == '__main__':
     application.run()

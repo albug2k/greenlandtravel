@@ -1,24 +1,26 @@
-# render.yaml — place in the ROOT of your repo
-# Render reads this file and auto-configures your services.
+# render.yaml — place in ROOT of your repo
 
 services:
-  # ── Flask Backend (Web Service) ────────────────────────────────────────────
   - type: web
     name: glt-travel-backend
     runtime: python
-    rootDir: backend                       # folder where your Flask app lives
+    rootDir: backend
+    # Pin Python to 3.11 — stable, widely supported, psycopg2 works perfectly
+    pythonVersion: 3.11.9
     buildCommand: |
       pip install --upgrade pip
       pip install -r requirements.txt
-      flask db upgrade
+      python -m flask db upgrade
     startCommand: gunicorn wsgi:application --workers 2 --bind 0.0.0.0:$PORT --timeout 120
     envVars:
       - key: FLASK_ENV
         value: production
       - key: FLASK_APP
         value: wsgi.py
+      - key: PYTHON_VERSION
+        value: 3.11.9
       - key: SECRET_KEY
-        generateValue: true                # Render auto-generates a secure value
+        generateValue: true
       - key: JWT_SECRET_KEY
         generateValue: true
       - key: DATABASE_URL
@@ -26,13 +28,10 @@ services:
           name: glt-travel-db
           property: connectionString
       - key: FRONTEND_URL
-        value: https://YOUR_VERCEL_APP.vercel.app   # update after Vercel deploy
-      - key: PYTHON_VERSION
-        value: "3.11.0"
+        value: https://YOUR_VERCEL_APP.vercel.app
 
-# ── PostgreSQL Database ────────────────────────────────────────────────────────
 databases:
-  - name: glttravel
+  - name: glt-travel-db
     databaseName: glttravel
-    user: glttravel_admin
-    plan: free                             # free tier: 1GB, 90-day limit
+    user: glttravel_user
+    plan: free
