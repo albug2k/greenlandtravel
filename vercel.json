@@ -1,7 +1,10 @@
 {
   "version": 2,
-  "name": "glt-travel-frontend",
   "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    },
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
@@ -12,12 +15,17 @@
   ],
   "routes": [
     {
+      "src": "/api(.*)",
+      "dest": "api/index.py"
+    },
+    {
       "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "dest": "frontend/dist/assets/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "frontend/dist/$1",
+      "status": 200
     }
   ]
 }

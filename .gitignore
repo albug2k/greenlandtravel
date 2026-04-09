@@ -1,0 +1,5 @@
+setup_vercel_db.py
+.vscode/
+.venv/
+.trunk/
+.sixth

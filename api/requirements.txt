@@ -1,0 +1,16 @@
+# api/requirements.txt
+# Vercel reads this from the same folder as api/index.py
+
+Flask==2.3.3
+Flask-SQLAlchemy==3.0.5
+Flask-Migrate==4.0.4
+Flask-JWT-Extended==4.5.3
+Flask-CORS==4.0.0
+Flask-Mail==0.9.1
+Werkzeug==2.3.7
+PyJWT==2.8.0
+pg8000==1.31.2
+python-dotenv==1.0.0
+python-dateutil==2.8.2
+email-validator==2.1.0
+stripe==10.12.0
